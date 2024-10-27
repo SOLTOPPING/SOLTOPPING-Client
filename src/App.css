@@ -7,7 +7,6 @@ body {
 
 .webAppWrapper {
   width: 393px;
-  height: 852px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -25,6 +24,8 @@ body {
 .startWrapper {
   display: flex;
   flex-direction: column;
+  height: 852px;
+
   background-color: #ffffff;
   flex-grow: 1;
 }
@@ -33,6 +34,8 @@ body {
 .testWrapper {
   display: flex;
   flex-direction: column;
+  height: 852px;
+
   flex-grow: 1;
   background-color: #8cc8e0;
   position: relative;
@@ -40,14 +43,10 @@ body {
 }
 
 /* recommendation */
-.scrollBtn {
-  width: 160px;
-  height: 22px;
-  margin-top: 25px;
-  border: none;
+.recommendationWrapper {
+  display: flex;
+  flex-direction: column;
   background-color: #8cc8e0;
-  color: #ffffff;
-  font-size: 11px;
-  border-radius: 10px;
-  margin-bottom: 70px;
+  position: relative;
+  overflow: hidden;
 }
