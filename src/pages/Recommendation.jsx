@@ -7,8 +7,10 @@ import Product from "../components/Product";
 import { productList } from "../utils/productList";
 import Button from "../components/Button";
 import productGroup from "../assets/productGroup.png";
+import { useNavigate } from "react-router-dom";
 
 const Recommendation = () => {
+  const navigate = useNavigate();
   return (
     <div className="webAppWrapper">
       <div className="recommendationWrapper">
@@ -59,11 +61,18 @@ const Recommendation = () => {
               <Product
                 key={idx}
                 title={product.title}
-                hashtag={product.hashtag}
+                hashtag1={product.hashtag1}
+                hashtag2={product.hashtag2}
                 content={product.content}
               />
             ))}
-            <Button text={"SOL 토핑 분석 마치기"} color={"sky"} />
+            <Button
+              text={"SOL 토핑 분석 마치기"}
+              color={"sky"}
+              onClick={() => {
+                navigate("/");
+              }}
+            />
           </ScrollContent>
         </ContentWrapper>
       </div>

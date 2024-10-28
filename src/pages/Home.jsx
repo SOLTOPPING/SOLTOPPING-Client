@@ -15,6 +15,7 @@ const Home = () => {
         <TopBar>
           <img src={topBar} alt="topBar" height="40px" width="100%" />
         </TopBar>
+        <BlankBar />
         <MiddleBar>
           <img src={middleBar} alt="middleBar" height="37px" width="329px" />
         </MiddleBar>
@@ -43,7 +44,14 @@ const TopBar = styled.div`
   width: 393px;
   height: 58px;
   background-color: #ffffff;
-  margin-bottom: 151px;
+`;
+
+const BlankBar = styled.div`
+  background-color: #ffffff;
+  width: 356px;
+  height: 110px;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto 43px;
 `;
 
 const MiddleBar = styled.div`
@@ -78,5 +86,5 @@ const TabBar = styled.div`
   display: flex;
   align-items: center;
   background-color: #ffffff;
-  flex-grow: 1;
+  height: 70px;
 `;

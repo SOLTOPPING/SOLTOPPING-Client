@@ -15,4 +15,6 @@ const StyledProductBtn = styled.button`
   font-size: 11px;
   border-radius: 10px;
   cursor: pointer;
+  padding: 0 15px;
+  font-family: "Noto Sans", "Noto Sans KR";
 `;

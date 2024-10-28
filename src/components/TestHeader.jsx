@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
@@ -11,7 +12,9 @@ const StyledHeader = styled.div`
   margin: 25px 0 5px;
 `;
 
-const LeftChild = styled.div``;
+const LeftChild = styled.div`
+  cursor: pointer;
+`;
 
 const HeaderText = styled.div`
   flex: 1;
@@ -19,9 +22,16 @@ const HeaderText = styled.div`
 `;
 
 const TestHeader = () => {
+  const navigate = useNavigate();
   return (
     <StyledHeader>
-      <LeftChild>&lt;</LeftChild>
+      <LeftChild
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        &lt;
+      </LeftChild>
       <HeaderText>나만의 신한 프렌즈 찾기</HeaderText>
     </StyledHeader>
   );

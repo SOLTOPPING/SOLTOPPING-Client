@@ -36,7 +36,7 @@ const NavigationBar = () => {
 export default NavigationBar;
 
 const NavigationBarWrapper = styled.div`
-  margin: 16px 0 46px;
+  margin: 16px 0 27px;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr);
