@@ -1,16 +1,24 @@
-import StatusBar from "../components/StatusBar";
-import myCharacter from "../assets/myCharacter.png";
-import ShareBtnList from "../components/ShareBtnList";
+import { useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import StatusBar from "../components/StatusBar";
+import ShareBtnList from "../components/ShareBtnList";
 import ProductBtn from "../components/ProductBtn";
 import Product from "../components/Product";
 import { productList } from "../utils/productList";
 import Button from "../components/Button";
+import myCharacter from "../assets/myCharacter.jpg";
 import productGroup from "../assets/productGroup.png";
-import { useNavigate } from "react-router-dom";
 
 const Recommendation = () => {
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    const img = new Image();
+    img.src = myCharacter;
+  }, []);
+
   return (
     <div className="webAppWrapper">
       <div className="recommendationWrapper">

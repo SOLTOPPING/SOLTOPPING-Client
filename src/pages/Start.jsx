@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
 import StatusBar from "../components/StatusBar";
 import Button from "../components/Button";
-import mainCharacters from "../assets/mainCharacters.png";
+import mainCharacters from "../assets/mainCharacters.jpg";
 
 const Start = () => {
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    const img = new Image();
+    img.src = mainCharacters; // 이미지 경로를 지정하여 미리 로드합니다.
+  }, []);
+
   return (
     <div className="webAppWrapper">
       <div className="startWrapper">
