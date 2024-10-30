@@ -26,7 +26,12 @@ const NavigationBar = () => {
         SOL토핑
         <img src={pizza} alt="pizza" height="34px" width="34px" />
       </SolBtn>
-      <SolBtn className=" green">
+      <SolBtn
+        className="green"
+        onClick={() => {
+          navigate("/hobby");
+        }}
+      >
         SOL취미
         <img src={flag} alt="flag" height="34px" width="34px" />
       </SolBtn>

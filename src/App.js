@@ -5,6 +5,7 @@ import Recommendation from "./pages/Recommendation";
 import Start from "./pages/Start";
 import Test from "./pages/Test";
 import Loading from "./pages/Loading";
+import Hobby from "./pages/Hobby";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/recommendation" element={<Recommendation />} />
         <Route path="/loading" element={<Loading />} />
+        <Route path="/hobby" element={<Hobby />} />
       </Routes>
     </BrowserRouter>
   );

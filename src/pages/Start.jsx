@@ -11,7 +11,7 @@ const Start = () => {
 
   useLayoutEffect(() => {
     const img = new Image();
-    img.src = mainCharacters; // 이미지 경로를 지정하여 미리 로드합니다.
+    img.src = mainCharacters;
   }, []);
 
   return (
@@ -42,7 +42,7 @@ const Start = () => {
 
 export default Start;
 
-const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
