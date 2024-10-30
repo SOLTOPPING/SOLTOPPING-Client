@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import styled from "styled-components";
@@ -6,6 +6,8 @@ import edit from "../assets/edit.png";
 import { months, weeks, shortWeeks } from "../utils/calendarUtils";
 import HobbyScoreBtn from "./HobbyScoreBtn";
 import stamp from "../assets/stamp.png";
+import search from "../assets/search.png";
+import { hobbyList } from "../utils/hobbyList";
 
 const HobbyCalendar = () => {
   const [value, onChange] = useState(new Date());
@@ -15,13 +17,13 @@ const HobbyCalendar = () => {
   const day = weeks[value.getDay()];
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const clickEdit = () => {
     setModalOpen(!modalOpen);
-    console.log(modalOpen);
+    setIsSaved(true);
   };
 
-  const [hobby, setHobby] = useState("");
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
   const [scoreList, setScoreList] = useState([
@@ -44,8 +46,37 @@ const HobbyCalendar = () => {
     );
   };
 
+  const [hobby, setHobby] = useState("");
+  const [isHaveInputValue, setIsHaveInputValue] = useState(false); // 입력값 여부 상태
+  const [dropDownList, setDropDownList] = useState(hobbyList); // 드롭다운 목록 상태
+  const [dropDownItemIndex, setDropDownItemIndex] = useState(-1); // 현재 선택된 드롭다운 항목의 인덱스
+
+  const showDropdownList = () => {
+    if (hobby === "") {
+      setIsHaveInputValue(false);
+      setDropDownList([]);
+    } else {
+      const choosenHobbyList = hobbyList.filter((item) => item.includes(hobby));
+      setDropDownList(choosenHobbyList);
+    }
+  };
+
+  const changeInputValue = (e) => {
+    setHobby(e.target.value);
+    setIsHaveInputValue(true);
+  };
+
+  const clickDropDownItem = (clickedItem) => {
+    setHobby(clickedItem);
+    setDropDownList([]);
+    setIsHaveInputValue(false);
+    console.log(isHaveInputValue);
+  };
+
+  useEffect(showDropdownList, [hobby]);
+
   return (
-    <CalendarWrapper>
+    <CalendarWrapper isSaved={isSaved}>
       <TodayWrapper>
         <TodayDate>
           {month} {date}, {day}
@@ -77,11 +108,35 @@ const HobbyCalendar = () => {
           <ListWrapper>
             <HobbyInputWrapper>
               <InputTitle>취미 등록</InputTitle>
-              <input
-                type="text"
-                placeholder="취미를 검색해보세요."
-                onChange={(e) => setHobby(e.target.value)}
-              />
+              <AutoWrapper>
+                <SearchWrapper>
+                  <input
+                    type="text"
+                    placeholder="취미를 검색해보세요."
+                    value={hobby}
+                    onChange={changeInputValue}
+                  />
+
+                  <img src={search} alt="search" />
+                </SearchWrapper>
+                {isHaveInputValue && (
+                  <DropDownBox>
+                    {dropDownList.map((dropItem, dropidx) => {
+                      return (
+                        <DropDownItem
+                          key={dropidx}
+                          onClick={() => clickDropDownItem(dropItem)}
+                          className={
+                            dropDownItemIndex === dropidx ? "selected" : "" // 선택된 항목 스타일
+                          }
+                        >
+                          {dropItem}
+                        </DropDownItem>
+                      );
+                    })}
+                  </DropDownBox>
+                )}
+              </AutoWrapper>
             </HobbyInputWrapper>
             <HobbyInputWrapper>
               <InputTitle>활동 시간</InputTitle>
@@ -141,8 +196,8 @@ const CalendarWrapper = styled.div`
   box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.13);
 
   .stamp {
-    width: 40px;
-    height: 40px;
+    width: 41px;
+    height: 41px;
     position: absolute;
   }
   .stamp.no1 {
@@ -156,6 +211,16 @@ const CalendarWrapper = styled.div`
   .stamp.no3 {
     bottom: 78px;
     left: 113px;
+  }
+  .react-calendar__tile--now {
+    background: ${({ isSaved }) =>
+      isSaved
+        ? `url(${stamp}) no-repeat center center / 90%`
+        : "#485e92"} !important;
+    color: ${({ isSaved }) => (isSaved ? "#000000" : "#ffffff")} !important;
+
+    border-radius: 50%;
+    color: #ffffff;
   }
 `;
 
@@ -182,12 +247,12 @@ const EditModal = styled.div`
   padding: 15px 26px;
   border-radius: 28px 28px 0 0;
   width: 341px;
-  bottom: -21px;
+  bottom: -32px;
   height: 435px;
   background-color: #ffffff;
   z-index: 30;
   position: absolute;
-  right: -22px;
+  right: -16px;
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.13);
 
   .save {
@@ -213,6 +278,7 @@ const HobbyInputWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
+  margin-bottom: 28px;
 
   input {
     height: 48px;
@@ -220,7 +286,6 @@ const HobbyInputWrapper = styled.div`
     border-radius: 11px;
     background-color: #e8e8e8;
     border: none;
-    margin-bottom: 22px;
     padding-left: 12px;
     font-family: "Noto Sans", "Noto Sans KR";
   }
@@ -232,11 +297,57 @@ const HobbyInputWrapper = styled.div`
 
 const InputTitle = styled.div`
   font-size: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 7px;
+  margin-left: 5px;
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  img {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const AutoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+`;
+
+const DropDownBox = styled.div`
+  border-radius: 0 0 16px 16px; // 하단 모서리 스타일
+  list-style-type: none; // 리스트 스타일 제거
+  z-index: 3; // 레이어 우선순위
+  background-color: #e8e8e8;
+  font-size: 14px;
+  padding: 3px 0 10px 10px;
+  position: absolute;
+  top: 43px;
+  width: 328px;
+`;
+
+const DropDownItem = styled.li`
+  list-style: none;
+  text-align: left;
+  margin-bottom: 5px;
+  cursor: pointer;
+
+  &.selected {
+    background-color: lightgray;
+  }
 `;
 
 const TimeWrapper = styled.div`
-  width: 100%;
+  width: 99%;
   display: flex;
   justify-content: space-between;
   align-items: baseline;

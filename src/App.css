@@ -94,9 +94,3 @@ body {
 .react-calendar__navigation__arrow {
   cursor: pointer;
 }
-
-.react-calendar__tile--now {
-  background: #485e92 !important;
-  border-radius: 50%;
-  color: #ffffff;
-}
