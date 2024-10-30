@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import styled from "styled-components";
 import edit from "../assets/edit.png";
 import { months, weeks, shortWeeks } from "../utils/calendarUtils";
 import HobbyScoreBtn from "./HobbyScoreBtn";
+import stamp from "../assets/stamp.png";
 
 const HobbyCalendar = () => {
   const [value, onChange] = useState(new Date());
@@ -65,6 +65,10 @@ const HobbyCalendar = () => {
           shortWeeks[moment(date).format("d")]
         } //요일 형식 변경
       />
+      <img src={stamp} alt="stamp1" className="stamp no1" />
+      <img src={stamp} alt="stamp2" className="stamp no2" />
+      <img src={stamp} alt="stamp3" className="stamp no3" />
+
       {modalOpen && (
         <EditModal>
           <button onClick={clickEdit} className="save">
@@ -129,12 +133,30 @@ const CalendarWrapper = styled.div`
   position: absolute;
   top: 210px;
   background-color: #97d5ee;
-  padding: 25px;
-  width: 300px;
+  padding: 20px;
+  width: 320px;
   height: 425px;
   border-radius: 28px;
 
   box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.13);
+
+  .stamp {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+  }
+  .stamp.no1 {
+    bottom: 78px;
+    left: 22px;
+  }
+  .stamp.no2 {
+    bottom: 124px;
+    left: 22px;
+  }
+  .stamp.no3 {
+    bottom: 78px;
+    left: 113px;
+  }
 `;
 
 const TodayWrapper = styled.div`

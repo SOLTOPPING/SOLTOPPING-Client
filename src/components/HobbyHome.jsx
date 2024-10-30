@@ -21,14 +21,15 @@ const HobbyHome = () => {
 };
 export default HobbyHome;
 
-const HobbyTitle = styled.div``;
+export const HobbyTitle = styled.div`
+  font-weight: bold;
+`;
 
 export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 22px;
   text-align: center;
-  font-weight: bold;
   font-size: 20px;
   align-items: center;
   position: relative;
