@@ -146,7 +146,7 @@ const HobbyCalendar = () => {
                   type="time"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
-                ~
+                -
                 <input
                   className="time"
                   type="time"
