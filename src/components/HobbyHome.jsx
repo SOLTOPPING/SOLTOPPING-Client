@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import hobbyCharacter from "../assets/hobbyCharacter.jpg";
+import HobbyCalendar from "./HobbyCalendar";
 const HobbyHome = () => {
   return (
     <TitleWrapper>
@@ -14,6 +15,7 @@ const HobbyHome = () => {
         width="198px"
         height="233px"
       />
+      <HobbyCalendar />
     </TitleWrapper>
   );
 };
@@ -29,4 +31,5 @@ export const TitleWrapper = styled.div`
   font-weight: bold;
   font-size: 20px;
   align-items: center;
+  position: relative;
 `;
